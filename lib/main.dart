@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/Screen/CategoryNews.dart';
+import 'package:news_app/Screen/Home.dart';
+import 'package:news_app/Screen/Onboarding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CategoryNews(name: "name"),
+      home: const OnboardingScreen(),
     );
   }
 }

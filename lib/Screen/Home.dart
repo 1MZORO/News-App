@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/Models/CategoryModel.dart';
+import 'package:news_app/Screen/CategoryNews.dart';
 import 'package:news_app/Services/Data.dart';
 import 'package:news_app/Services/News.dart';
 
@@ -111,6 +112,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     padding: const EdgeInsets.only(right: 10),
                                     child: Image.network(
                                       articles[index].urlToImage!,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Icon(Icons.broken_image, size: 100, color: Colors.grey);
+                                      },
                                       fit: BoxFit.cover,
                                       height: 150,
                                       width: size.width / 1.8,
@@ -275,54 +279,59 @@ class CategoryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 20),
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(60),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(60),
-              child: Image.asset(
-                image,
-                height: 120,
-                width: 120,
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context,MaterialPageRoute(builder: (_)=>CategoryNews(name: categoty)));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 20),
+        child: Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.circular(60),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: Image.asset(
+                  image,
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          Container(
-            height: 120,
-            width: 120,
-            decoration: BoxDecoration(
-              color: Colors.black54,
-              borderRadius: BorderRadius.circular(60),
-            ),
-          ),
-          Container(
-            height: 120,
-            width: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(60),
-            ),
-            child: Center(
-              child: Text(
-                categoty,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                color: Colors.black54,
+                borderRadius: BorderRadius.circular(60),
               ),
             ),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-        ],
+            Container(
+              height: 120,
+              width: 120,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(60),
+              ),
+              child: Center(
+                child: Text(
+                  categoty,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
       ),
     );
   }
